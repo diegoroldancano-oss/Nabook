@@ -28,6 +28,9 @@ body, html {
     --shadow: 0 4px 6px -1px rgba(6, 75, 122, 0.09);
     --input-bg: #94a3b818;
     --card-header-bg: #3482db;
+    --table-row-alt: #f8fafc;
+    --table-row-hover: #e8f1ff;
+    --table-row-selected: #dbeafe;
 }
 
 
@@ -45,6 +48,9 @@ body, html {
     --card-header-bg: #1d4ed8;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     --input-bg: #0f172a;
+    --table-row-alt: #273449;
+    --table-row-hover: #334155;
+    --table-row-selected: #35425b;
 
 }
 
@@ -776,15 +782,51 @@ botones del header de los navaside links  */
         background-color: var(--card-bg);
         border: 1px solid var(--border);
         table-layout: auto;
+        box-shadow: var(--shadow);
 
         thead {
             background-color: var(--card-header-bg);
             color: #fff;
             line-height: 2.5;
+
+            th {
+                position: relative;
+                padding: 12px 10px;
+                letter-spacing: 0.02em;
+                font-size: 0.9rem;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+
+            th:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 22%;
+                height: 56%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.3);
+            }
         }
 
         tbody {
             background-color: inherit;
+
+            tr {
+                transition: background-color 0.22s ease, transform 0.2s ease;
+            }
+
+            tr:nth-child(even) {
+                background-color: var(--table-row-alt);
+            }
+
+            tr:hover {
+                background-color: var(--table-row-hover);
+            }
+
+            tr:focus-within {
+                background-color: var(--table-row-selected);
+            }
 
             th,td {
                 border-bottom: 1px solid var(--border);
@@ -800,6 +842,7 @@ botones del header de los navaside links  */
                 min-height: 20px;
                 max-height: 100px;
                 overflow: hidden;
+                color: var(--text-primary);
             }
         }
     }
@@ -826,15 +869,51 @@ botones del header de los navaside links  */
         text-align: center;
         background-color: var(--card-bg);
         border: 1px solid var(--border);
+        box-shadow: var(--shadow);
 
         thead {
             background-color: var(--card-header-bg);
             color: #fff;
             line-height: 2.5;
+
+            th {
+                position: relative;
+                padding: 11px 9px;
+                letter-spacing: 0.02em;
+                font-size: 0.9rem;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+
+            th:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 22%;
+                height: 56%;
+                width: 1px;
+                background-color: rgba(255, 255, 255, 0.3);
+            }
         }
 
         tbody {
             background-color: inherit;
+
+            tr {
+                transition: background-color 0.22s ease, transform 0.2s ease;
+            }
+
+            tr:nth-child(even) {
+                background-color: var(--table-row-alt);
+            }
+
+            tr:hover {
+                background-color: var(--table-row-hover);
+            }
+
+            tr:focus-within {
+                background-color: var(--table-row-selected);
+            }
 
             th,td {
                 border-bottom: 1px solid var(--border);
@@ -850,6 +929,7 @@ botones del header de los navaside links  */
                 min-height: 20px;
                 max-height: 100px;
                 overflow: hidden;
+                color: var(--text-primary);
             }
         }
     }
