@@ -973,6 +973,47 @@ botones del header de los navaside links  */
 /* ---- RESPONSIVE DECRIPTIONS + TABLAS ENDS ---- */
 
 
+/*----- VENTAS SECTION -----*/
+
+.main__sales-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.sales__form-wrapper {
+    width: 100%
+}
+
+.sales__form {
+    background-color: var(--card-bg);
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    padding: 9px;
+    margin: 0px 10px;
+    margin-bottom: 7px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    div {
+            padding: 18px;
+
+            input {
+                padding: 3.5px;
+                border: 1px solid #222;
+                border-radius: 0.277rem;
+                width: 200px;
+                background-color: var(--input-bg);
+            }
+        }
+
+}
+
+
+/*----- VENTAS ENDS -----*/
+
+
+
+
 /*---- PROFILE SETTINGS SECTIONS ----*/
 
 .perfil__container-wrapper {
@@ -1082,6 +1123,89 @@ la información personal e infomación de negocio*/
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     padding: 20px;
+}
+
+@media (max-width: 900px) {
+    .perfil__section {
+        margin-top: 28px;
+        padding-inline: 12px;
+    }
+
+    .perfil__section-content,
+    .perfil__info-card {
+        width: 100%;
+        max-width: 760px;
+    }
+
+    .perfil__section-content {
+        gap: 60px;
+    }
+
+    .form__perfil {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .perfil__section-content {
+        min-height: auto;
+        gap: 14px;
+    }
+
+    .perfil__content {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .perfil__button {
+            margin: 0 0 14px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+    }
+
+    .perfil {
+        margin: 20px;
+    }
+
+    .perfil__info-card {
+        min-height: auto;
+
+        h3 {
+            font-size: 1.05rem;
+            padding: 16px;
+        }
+    }
+
+    .form__perfil {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 420px) {
+    .perfil {
+        margin: 16px;
+
+        .perfil-description {
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            p {
+                font-size: 0.82rem;
+            }
+        }
+    }
+
+    .perfil__content .perfil__button {
+        margin: 0 0 12px 16px;
+
+        button {
+            width: 100%;
+        }
+    }
 }
 
 
