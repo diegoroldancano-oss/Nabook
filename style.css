@@ -120,3 +120,100 @@ body, html {
     margin: 5px;
 }
 /* ---- HEADER NAVSEARCH ENDS ---- */
+
+
+/* ---- RESPONSIVE DASHBOARD WRAPPER + HEADER NAVSEARCH ---- */
+
+@media (max-width: 1024px) {
+    .container__header {
+        gap: 10px;
+        padding: 10px 12px;
+    }
+
+    .container__header-form {
+        flex: 1;
+        min-width: 0;
+
+        input {
+            width: 100%;
+            min-width: 140px;
+        }
+    }
+
+    .container__header-nav-icon {
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container__wrapper {
+        max-height: none;
+        min-height: 100vh;
+    }
+
+    .container__header {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+        row-gap: 8px;
+    }
+
+    .container__header-link {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    .container__header-form {
+        order: 3;
+        width: 100%;
+
+        input {
+            width: 100%;
+        }
+
+        button {
+            white-space: nowrap;
+        }
+    }
+
+    .container__header-nav-icon {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: auto;
+    }
+
+    .nav__icon-item {
+        margin: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container__header {
+        padding: 8px;
+    }
+
+    .container__header-form {
+        gap: 4px;
+
+        input {
+            padding: 5px;
+            font-size: 0.9rem;
+        }
+
+        button {
+            font-size: 0.65rem;
+            padding: 5px 6px;
+        }
+    }
+
+    .container__header-nav-icon {
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+/* ---- RESPONSIVE ENDS ---- */
