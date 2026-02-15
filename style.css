@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+body, div, header, footer, aside, nav, span, article {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: sans-serif;
+    height: 100vh;
+}
+
+
+:root {
+    --font-family: roboto, sans-serif;
+    --primary: #2563eb;
+    --primary-dark: #1e298afa;
+    --primary-hover: #3b83f6b2;
+    --primary-light: #f0efff9f;
+    --background: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(6, 75, 122, 0.09);
+    --input-bg: #94a3b818;
+    --card-header-bg: #3482db;
+}
+
+
+/* ---- SECCIÒN DASHBOAR WRAPPER ---- */
+
+.container__wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    overflow: hidden;
+}
+/* ---- DASHBOAR WRAPPER ENDS ---- */
+
+/* ---- SECCIÒN HEADER NAVSEARCH ---- */
+
+.container__nav-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    background-color: var(--card-bg);
+}
+
+.container__header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 0.1px solid #2222223d;
+}
+
+.container__header-link {
+    margin-left: 15px;
+}
+
+.container__header-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    svg {
+        color: #0000008c;
+    }
+
+    input {
+        background-color: var(--primary-light);
+        border: 2px solid var(--border);
+        border-radius: 6px;
+        margin: auto;
+        width: 300px;
+        padding: 6px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        color: var(--card-bg);
+        font-size: 0.7rem;
+        padding: 5px;
+        background-color: var(--primary);
+        border-radius: 4px;
+    }
+}
+
+.container__header-nav-icon {
+    gap: 2px;
+    margin-right: 10px;
+    
+    svg {
+        color: #000000;
+        border: 1px solid var(--card-bg);
+        padding: 4px;
+
+    }
+
+    svg:hover {
+        border: 1px solid var(--border);
+        border-radius: 99999px;
+        background-color: #00000017;
+
+    }
+}
+
+.nav__icon-item {
+    margin: 5px;
+}
+/* ---- HEADER NAVSEARCH ENDS ---- */
