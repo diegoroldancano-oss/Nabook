@@ -566,3 +566,123 @@ body, html {
 }
 
 /* ----  MAIN INICIO ENDS ---- */
+
+/* ---- RESPONSIVE MAIN INICIO ---- */
+
+@media (max-width: 1024px) {
+    .main__header {
+        margin-left: 20px;
+
+        h2 {
+            font-size: 1.9rem;
+        }
+
+        p {
+            margin: 14px 0 18px;
+        }
+    }
+
+    .main__header-button {
+        margin-right: 14px;
+    }
+
+    .main__footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+        min-height: auto;
+    }
+
+    .main__card-footer:last-child {
+        grid-column: 1 / -1;
+        min-height: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main__header {
+        margin: 0;
+        padding: 18px 14px 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .main__header-description {
+        flex: 1 1 100%;
+    }
+
+    .main__header-button {
+        margin: 0;
+    }
+
+    .button--subt {
+        margin-right: 0;
+    }
+
+    .main__footer {
+        margin: 0 10px 14px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .main__card-footer {
+        margin: 0;
+        padding: 24px;
+    }
+
+    .main__card-footer:last-child {
+        min-height: 240px;
+    }
+
+    .main__chart {
+        padding-bottom: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main__header {
+        padding: 14px 10px 8px;
+
+        h2 {
+            font-size: 1.55rem;
+        }
+
+        p {
+            font-size: 0.92rem;
+            margin: 8px 0 10px;
+        }
+    }
+
+    .main__header-button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .button--subt {
+        display: inline-flex;
+    }
+
+    .main__footer {
+        margin: 0 8px 12px;
+    }
+
+    .main__card-footer {
+        padding: 18px 14px;
+
+        > span {
+            font-size: 1.45rem;
+            line-height: 1.5;
+        }
+    }
+
+    .main__card-footer:last-child {
+        min-height: 210px;
+    }
+
+    .bar {
+        width: 28px;
+    }
+}
+
+/* ---- RESPONSIVE MAIN INICIO ENDS ---- */
