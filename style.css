@@ -10,6 +10,8 @@ body, div, header, footer, aside, nav, span, article {
 body, html {
     font-family: sans-serif;
     height: 100vh;
+    background-color: var(--background);
+    color: var(--text-primary);
 }
 
 
@@ -38,19 +40,19 @@ body, html {
     --primary: #6366f1;
     --primary-dark: #4338ca;
     --primary-hover: #818cf8;
-    --primary-light: rgba(99, 102, 241, 0.2);
+    --primary-light: rgba(99, 102, 241, 0.16);
     --background: #0f172a;
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
-    --text-muted: #64748b;
+    --text-muted: #94a3b8;
     --border: #334155;
     --card-bg: #1e293b;
     --card-header-bg: #1d4ed8;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-    --input-bg: #0f172a;
+    --input-bg: #1b2435;
     --table-row-alt: #273449;
     --table-row-hover: #334155;
-    --table-row-selected: #35425b;
+    --table-row-selected: #3d4e6b;
 
 }
 
@@ -81,7 +83,7 @@ body, html {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border-bottom: 0.1px solid #2222223d;
+    border-bottom: 1px solid var(--border);
 }
 
 .container__header-link {
@@ -95,12 +97,13 @@ body, html {
     gap: 5px;
 
     svg {
-        color: #0000008c;
+        color: var(--text-secondary);
     }
 
     input {
         background-color: var(--primary-light);
         border: 2px solid var(--border);
+        color: var(--text-primary);
         border-radius: 6px;
         margin: auto;
         width: 300px;
@@ -112,7 +115,7 @@ body, html {
     }
 
     button {
-        color: var(--card-bg);
+        color: #fff;
         font-size: 0.7rem;
         padding: 5px;
         background-color: var(--primary);
@@ -125,8 +128,8 @@ body, html {
     margin-right: 10px;
     
     svg {
-        color: #000000;
-        border: 1px solid var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid transparent;
         padding: 4px;
 
     }
@@ -134,7 +137,7 @@ body, html {
     svg:hover {
         border: 1px solid var(--border);
         border-radius: 99999px;
-        background-color: #00000017;
+        background-color: var(--primary-light);
 
     }
 }
@@ -260,7 +263,7 @@ body, html {
     flex-direction: column;
     background-color: var(--card-bg);
     min-width: 283px;
-    border-right: 0.1px solid #2222223d;
+    border-right: 1px solid var(--border);
     max-height: 93vh;
 }
 
@@ -303,17 +306,17 @@ body, html {
         gap: 3px;
 
         span {
-            color: #000000d2;
+            color: var(--text-secondary);
         }
     }
 
     a:hover {
-        background-color: #00000017;
+        background-color: var(--primary-light);
         border-radius: 9px;
         
 
         span {
-            color: #000000;
+            color: var(--text-primary);
         }
     }
 }
@@ -342,7 +345,7 @@ body, html {
         padding: 14px 25px;
 
         span {
-            color: #000000ec;
+            color: var(--text-secondary);
         }   
     }
 }
@@ -378,7 +381,7 @@ body, html {
         width: 100%;
         min-width: 0;
         border-right: none;
-        border-bottom: 1px solid #2222223d;
+        border-bottom: 1px solid var(--border);
     }
 
     .content__header-nav {
@@ -494,20 +497,20 @@ body, html {
 
 .main__header-button {
     background-color: var(--primary);
-    color: var(--card-bg);
+    color: #fff;
     border-radius: 5px;
     margin: 0;
     margin-right: 28px;
     margin-bottom: 20px;
     padding: 7px;
-    border: 1px solid var(--card-bg);
+    border: 1px solid var(--primary-dark);
     box-shadow: var(--shadow);
 }
 
 .button--subt {
     background-color: var(--card-bg);
     color: var(--text-primary);
-    border: 1px solid #2222222d;
+    border: 1px solid var(--border);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -536,6 +539,7 @@ body, html {
     border: 2px solid var(--border);
     border-radius: 9px;
     background-color: var(--card-bg);
+    color: var(--text-primary);
     box-shadow: var(--shadow);
     margin: 10px;
 
@@ -720,7 +724,7 @@ body, html {
     flex-direction: row;
     align-items: self-end;
     background-color: var(--card-bg);
-    border: 1px solid #fff;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
     padding: 9px;
     margin: 10px;
@@ -1083,7 +1087,7 @@ botones del header de los navaside links  */
 
 .sales__form {
     background-color: var(--card-bg);
-    border: 1px solid #fff;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
     padding: 9px;
     margin: 0px 10px;
@@ -1096,10 +1100,11 @@ botones del header de los navaside links  */
 
             input {
                 padding: 3.5px;
-                border: 1px solid #222;
+                border: 1px solid var(--border);
                 border-radius: 0.277rem;
                 width: 200px;
                 background-color: var(--input-bg);
+                color: var(--text-primary);
             }
         }
 
@@ -1149,7 +1154,7 @@ botones del header de los navaside links  */
 
 .fact__info-wraper {
     background-color: var(--card-bg);
-    border: 1px solid #fff;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
     padding: 9px;
     margin: 9px 10px;
@@ -1165,10 +1170,11 @@ botones del header de los navaside links  */
 
             input {
                 padding: 3.5px;
-                border: 1px solid #222;
+                border: 1px solid var(--border);
                 border-radius: 0.277rem;
                 width: 200px;
                 background-color: var(--input-bg);
+                color: var(--text-primary);
             }
         }
     }
@@ -1235,7 +1241,7 @@ botones del header de los navaside links  */
     justify-content: center;
     align-items: center;
     background-color: var(--card-bg);
-    border: 2px solid #fff;
+    border: 2px solid var(--border);
     border-radius: 1rem;
     width: 800px;
     gap: 400px;
@@ -1274,7 +1280,7 @@ botones del header de los navaside links  */
     .perfil-foto {
         width: 64px;
         height: 64px;
-        border: 2px solid #000000;
+        border: 2px solid var(--border);
         border-radius: 999999px ;
         overflow: hidden;
     }
@@ -1307,7 +1313,7 @@ la información personal e infomación de negocio*/
     display: flex;
     flex-direction: column;
     min-height: 250px;
-    border: 1px solid #fff;
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
 
 

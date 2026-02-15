@@ -6,6 +6,8 @@ const BUSINESS_FIELDS = Object.freeze([
     "fecha-creacion"
 ]);
 
+const THEME_STORAGE_KEY = "nabook-theme";
+const DARK_THEME = "dark";
 const DEFAULT_PHOTO_URL = "img/profile-img.jpg";
 const MAX_PHOTO_SIZE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_PHOTO_TYPES = Object.freeze(["image/png", "image/jpeg", "image/webp"]);
@@ -219,7 +221,7 @@ export class PerfilView {
         this.photoPreview = this.doc.getElementById("perfil-photo-preview");
         this.photoInput = this.doc.getElementById("perfil-photo-input");
         this.btnCambiarFoto = this.doc.getElementById("btn-cambiar-foto");
-        this.btnRemoverFoto = this.doc.getElementById("btn-remover-foto");
+        this.btnToggleTheme = this.doc.getElementById("btn-toggle-theme");
 
         this.businessTitle = this.doc.getElementById("perfil-business-title");
         this.businessSubtitle = this.doc.getElementById("perfil-business-subtitle");
@@ -276,7 +278,7 @@ export class PerfilView {
         });
     }
 
-    bindPhotoActions({ onCambiarFoto, onSeleccionarFoto, onRemoverFoto }) {
+    bindPhotoActions({ onCambiarFoto, onSeleccionarFoto, onToggleTheme }) {
         if (this.btnCambiarFoto) {
             this.btnCambiarFoto.addEventListener("click", onCambiarFoto);
         }
@@ -289,8 +291,8 @@ export class PerfilView {
             });
         }
 
-        if (this.btnRemoverFoto) {
-            this.btnRemoverFoto.addEventListener("click", onRemoverFoto);
+        if (this.btnToggleTheme) {
+            this.btnToggleTheme.addEventListener("click", onToggleTheme);
         }
     }
 
@@ -347,8 +349,8 @@ export class PerfilView {
             this.btnCambiarFoto.disabled = isLoading;
         }
 
-        if (this.btnRemoverFoto) {
-            this.btnRemoverFoto.disabled = isLoading;
+        if (this.btnToggleTheme) {
+            this.btnToggleTheme.disabled = isLoading;
         }
 
         if (this.btnCambiarFoto) {
@@ -360,6 +362,15 @@ export class PerfilView {
 
             this.btnCambiarFoto.textContent = this.btnCambiarFoto.dataset.label || "Cambiar foto";
         }
+    }
+
+    setThemeToggleState(isDarkTheme) {
+        if (!this.btnToggleTheme) {
+            return;
+        }
+
+        this.btnToggleTheme.textContent = isDarkTheme ? "Modo normal" : "Modo oscuro";
+        this.btnToggleTheme.setAttribute("aria-pressed", isDarkTheme ? "true" : "false");
     }
 
     mostrarFeedback(scope, message, type = "info") {
@@ -482,13 +493,6 @@ export class PerfilApi {
         });
     }
 
-    async removerFoto(signal) {
-        return this.request("/api/perfil/foto", {
-            method: "DELETE",
-            signal
-        });
-    }
-
     async request(path, { method = "GET", body, signal } = {}) {
         if (!this.estaDisponible()) {
             return null;
@@ -540,7 +544,7 @@ export class PerfilController {
         this.handleSubmitNegocio = this.handleSubmitNegocio.bind(this);
         this.handleCambiarFoto = this.handleCambiarFoto.bind(this);
         this.handleSeleccionarFoto = this.handleSeleccionarFoto.bind(this);
-        this.handleRemoverFoto = this.handleRemoverFoto.bind(this);
+        this.handleToggleTheme = this.handleToggleTheme.bind(this);
     }
 
     init() {
@@ -551,16 +555,67 @@ export class PerfilController {
         const initialState = this.view.leerEstadoInicial();
         this.model.hidratar(initialState);
         this.view.render(this.model.obtenerEstado());
+        this.inicializarTema();
 
         this.view.bindSubmitPersonal(this.handleSubmitPersonal);
         this.view.bindSubmitNegocio(this.handleSubmitNegocio);
         this.view.bindPhotoActions({
             onCambiarFoto: this.handleCambiarFoto,
             onSeleccionarFoto: this.handleSeleccionarFoto,
-            onRemoverFoto: this.handleRemoverFoto
+            onToggleTheme: this.handleToggleTheme
         });
 
         this.cargarPerfilRemoto();
+    }
+
+    // ===== LOGICA DE TEMA (MODO OSCURO / MODO NORMAL) =====
+    inicializarTema() {
+        const savedTheme = this.leerTemaPersistido();
+        const initialTheme = savedTheme === DARK_THEME ? DARK_THEME : "light";
+        this.aplicarTema(initialTheme);
+    }
+
+    leerTemaPersistido() {
+        try {
+            return localStorage.getItem(THEME_STORAGE_KEY) || "";
+        } catch (_error) {
+            return "";
+        }
+    }
+
+    persistirTema(theme) {
+        try {
+            if (theme === DARK_THEME) {
+                localStorage.setItem(THEME_STORAGE_KEY, DARK_THEME);
+                return;
+            }
+
+            localStorage.removeItem(THEME_STORAGE_KEY);
+        } catch (_error) {
+            // No bloquea la UI si el navegador no permite storage.
+        }
+    }
+
+    obtenerTemaActual() {
+        const currentTheme = this.view.doc.documentElement.getAttribute("data-theme");
+        return currentTheme === DARK_THEME ? DARK_THEME : "light";
+    }
+
+    aplicarTema(theme) {
+        const isDarkTheme = theme === DARK_THEME;
+        if (isDarkTheme) {
+            this.view.doc.documentElement.setAttribute("data-theme", DARK_THEME);
+        } else {
+            this.view.doc.documentElement.removeAttribute("data-theme");
+        }
+
+        this.view.setThemeToggleState(isDarkTheme);
+    }
+
+    handleToggleTheme() {
+        const nextTheme = this.obtenerTemaActual() === DARK_THEME ? "light" : DARK_THEME;
+        this.aplicarTema(nextTheme);
+        this.persistirTema(nextTheme);
     }
 
     async cargarPerfilRemoto() {
@@ -741,44 +796,6 @@ export class PerfilController {
             this.revokePreviewUrl();
             this.view.render(this.model.obtenerEstado());
             this.view.mostrarFeedback("negocio", this.formatearError(requestError), "error");
-        } finally {
-            this.finalizarRequestController(requestController);
-            this.view.setPhotoLoading(false);
-        }
-    }
-
-    async handleRemoverFoto() {
-        this.view.limpiarFeedback("negocio");
-
-        if (this.model.obtenerFoto() === DEFAULT_PHOTO_URL) {
-            this.view.mostrarFeedback("negocio", "La foto ya esta en estado predeterminado.", "info");
-            return;
-        }
-
-        this.model.actualizarFoto(DEFAULT_PHOTO_URL);
-        this.view.render(this.model.obtenerEstado());
-        this.view.setPhotoLoading(true);
-
-        const requestController = this.crearRequestController();
-
-        try {
-            await this.api.removerFoto(requestController.signal);
-            this.model.confirmarFoto();
-            this.revokePreviewUrl();
-            this.view.render(this.model.obtenerEstado());
-
-            const feedback = this.api.estaDisponible()
-                ? "Foto removida."
-                : "Foto removida en modo local (pre-backend).";
-            this.view.mostrarFeedback("negocio", feedback, "success");
-        } catch (error) {
-            if (error.name === "AbortError") {
-                return;
-            }
-
-            this.model.revertirFoto();
-            this.view.render(this.model.obtenerEstado());
-            this.view.mostrarFeedback("negocio", this.formatearError(error), "error");
         } finally {
             this.finalizarRequestController(requestController);
             this.view.setPhotoLoading(false);
